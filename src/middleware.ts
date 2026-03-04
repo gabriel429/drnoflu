@@ -47,15 +47,16 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl);
     }
 
-    // Check if user has admin or editor role
+    // Check if user has admin, super_admin, or editor role
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
       .eq("id", session.user.id)
       .single();
 
-    if (!profile || (profile.role !== "admin" && profile.role !== "editeur")) {
-      // Redirect to login if not admin/editor
+    const allowedRoles = ["super_admin", "admin", "editeur"];
+    if (!profile || !allowedRoles.includes(profile.role)) {
+      // Redirect to login if not authorized
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
   }

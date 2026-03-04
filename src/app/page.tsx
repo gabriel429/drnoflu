@@ -4,6 +4,8 @@ import {
   SidebarSection,
   BonASavoirSection,
   CTASection,
+  PerformancesSection,
+  ProjetsPharesSection,
 } from "@/components/sections";
 
 /**
@@ -16,8 +18,14 @@ export default function HomePage() {
       {/* Section Hero avec image du bâtiment */}
       <HeroSection />
 
-      {/* Section actualités + sidebar avec direction - right after hero */}
+      {/* Section Projets Phares - Notre Impact */}
+      <ProjetsPharesSection />
+
+      {/* Section actualités + sidebar avec direction */}
       <SidebarSection />
+
+      {/* Section Nos Performances */}
+      <PerformancesSection />
 
       {/* Présentation des services/types de recettes */}
       <ServicesSection />

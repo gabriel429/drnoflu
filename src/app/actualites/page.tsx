@@ -206,8 +206,8 @@ export default function ActualitesPage() {
                     >
                       <CardContent className="p-0">
                         <div className="flex flex-col md:flex-row">
-                          {/* Image */}
-                          <div className="md:w-64 h-48 md:h-auto bg-gradient-to-br from-primary-100 to-primary-50 flex-shrink-0 relative">
+                          {/* Image carrée */}
+                          <div className="aspect-square md:aspect-auto md:w-72 md:h-auto bg-gradient-to-br from-primary-100 to-primary-50 flex-shrink-0 relative">
                             {actu.image_url ? (
                               <Image
                                 src={actu.image_url}
@@ -216,7 +216,7 @@ export default function ActualitesPage() {
                                 className="object-cover"
                               />
                             ) : (
-                              <div className="flex items-center justify-center h-full">
+                              <div className="flex items-center justify-center h-full min-h-48">
                                 <Newspaper className="h-12 w-12 text-primary-300" />
                               </div>
                             )}

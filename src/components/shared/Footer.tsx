@@ -1,13 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  ExternalLink,
-  Settings,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, ExternalLink } from "lucide-react";
 import { SITE_CONFIG, MAIN_NAV } from "@/lib/config";
 import { Separator } from "@/components/ui/separator";
 
@@ -174,14 +167,6 @@ export function Footer() {
             © {currentYear} {SITE_CONFIG.fullName}. Tous droits réservés.
           </p>
           <div className="flex items-center gap-4 text-sm text-gray-400">
-            <Link
-              href="/admin"
-              className="hover:text-white flex items-center gap-1"
-            >
-              <Settings className="h-3 w-3" />
-              Administration
-            </Link>
-            <span className="text-gray-600">|</span>
             <Link href="/mentions-legales" className="hover:text-white">
               Mentions légales
             </Link>
@@ -190,9 +175,7 @@ export function Footer() {
               Politique de confidentialité
             </Link>
             <span className="text-gray-600">|</span>
-            <span className="text-gray-500">
-              Service de Communication
-            </span>
+            <span className="text-gray-500">Service de Communication</span>
           </div>
         </div>
       </div>

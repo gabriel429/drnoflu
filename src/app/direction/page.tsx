@@ -153,6 +153,37 @@ export default async function DirectionPage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Ministre Provincial des Finances */}
+          <Card className="max-w-4xl mx-auto overflow-hidden mt-8">
+            <CardContent className="p-0">
+              <div className="grid md:grid-cols-3 gap-0">
+                {/* Photo du Ministre */}
+                <div className="relative h-[300px] md:h-auto bg-gradient-to-br from-gray-100 to-gray-50">
+                  <Image
+                    src={DIRECTION_INFO.ministre.photo}
+                    alt={DIRECTION_INFO.ministre.nom}
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+
+                {/* Informations du Ministre */}
+                <div className="md:col-span-2 p-8 flex flex-col justify-center">
+                  <Badge className="w-fit mb-3 bg-gray-100 text-gray-700 hover:bg-gray-100">
+                    <Briefcase className="h-3 w-3 mr-1" />
+                    {DIRECTION_INFO.ministre.titre}
+                  </Badge>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {DIRECTION_INFO.ministre.nom}
+                  </h3>
+                  <blockquote className="text-gray-600 italic border-l-4 border-gray-400 pl-4">
+                    &ldquo;{DIRECTION_INFO.ministre.slogan}&rdquo;
+                  </blockquote>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

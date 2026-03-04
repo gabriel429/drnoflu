@@ -42,7 +42,7 @@ export function SidebarSection() {
       .select("*")
       .eq("publie", true)
       .order("date_publication", { ascending: false })
-      .limit(3);
+      .limit(4);
 
     if (!error && data) {
       setActualites(data);
@@ -51,9 +51,9 @@ export function SidebarSection() {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-10 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6">
           {/* Colonne principale: Actualités */}
           <div className="lg:col-span-2">
             <motion.div
@@ -74,19 +74,17 @@ export function SidebarSection() {
               </Link>
             </motion.div>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {loading ? (
                 // Skeleton loaders
-                Array.from({ length: 3 }).map((_, i) => (
+                Array.from({ length: 4 }).map((_, i) => (
                   <Card key={i} className="overflow-hidden">
                     <CardContent className="p-0">
-                      <div className="flex flex-col sm:flex-row">
-                        <Skeleton className="sm:w-64 h-48" />
-                        <div className="p-4 flex-1 space-y-3">
-                          <Skeleton className="h-4 w-24" />
-                          <Skeleton className="h-5 w-full" />
-                          <Skeleton className="h-4 w-3/4" />
-                        </div>
+                      <Skeleton className="w-full aspect-square" />
+                      <div className="p-4 space-y-3">
+                        <Skeleton className="h-4 w-24" />
+                        <Skeleton className="h-5 w-full" />
+                        <Skeleton className="h-4 w-3/4" />
                       </div>
                     </CardContent>
                   </Card>
@@ -105,15 +103,16 @@ export function SidebarSection() {
                   return (
                     <motion.div
                       key={actu.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Card className="overflow-hidden hover:shadow-md transition-shadow">
-                        <CardContent className="p-0">
-                          <div className="flex flex-col sm:flex-row">
-                            <div className="sm:w-64 h-48 sm:h-auto bg-gray-200 relative flex-shrink-0">
+                      <Link href={`/actualites/${actu.slug}`}>
+                        <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+                          <CardContent className="p-0">
+                            {/* Image carrée en haut */}
+                            <div className="w-full aspect-square bg-gray-200 relative">
                               {actu.image_url ? (
                                 <Image
                                   src={actu.image_url}
@@ -129,7 +128,8 @@ export function SidebarSection() {
                                 </div>
                               )}
                             </div>
-                            <div className="p-4 flex-1">
+                            {/* Texte en bas */}
+                            <div className="p-4">
                               <div className="flex items-center gap-2 mb-2">
                                 <Badge
                                   variant="secondary"
@@ -144,25 +144,19 @@ export function SidebarSection() {
                                   ).toLocaleDateString("fr-FR", {
                                     day: "numeric",
                                     month: "short",
-                                    year: "numeric",
                                   })}
                                 </span>
                               </div>
-                              <Link
-                                href={`/actualites/${actu.slug}`}
-                                className="block"
-                              >
-                                <h3 className="font-semibold text-gray-900 hover:text-primary-700 transition-colors line-clamp-2 mb-2">
-                                  {actu.titre}
-                                </h3>
-                              </Link>
-                              <p className="text-sm text-gray-600 line-clamp-2">
+                              <h3 className="font-semibold text-gray-900 hover:text-primary-700 transition-colors line-clamp-2 mb-1 text-sm">
+                                {actu.titre}
+                              </h3>
+                              <p className="text-xs text-gray-600 line-clamp-2">
                                 {actu.extrait}
                               </p>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                          </CardContent>
+                        </Card>
+                      </Link>
                     </motion.div>
                   );
                 })
@@ -171,7 +165,7 @@ export function SidebarSection() {
           </div>
 
           {/* Sidebar droite */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Directeur Provincial - Section principale */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -188,7 +182,7 @@ export function SidebarSection() {
                       fill
                       className="object-cover object-top"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-900/80 to-transparent" />
                   </div>
                   {/* Infos du directeur */}
                   <div className="p-5">
@@ -273,6 +267,40 @@ export function SidebarSection() {
                   </div>
                   <blockquote className="text-sm text-gray-600 italic border-l-2 border-primary-300 pl-3">
                     &ldquo;{DIRECTION_INFO.gouverneure.slogan}&rdquo;
+                  </blockquote>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Ministre Provincial des Finances */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <Card className="overflow-hidden bg-gradient-to-br from-gray-100 to-white border-gray-200">
+                <CardContent className="p-5">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-gray-300">
+                      <Image
+                        src={DIRECTION_INFO.ministre.photo}
+                        alt={DIRECTION_INFO.ministre.nom}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-600 font-medium uppercase tracking-wide">
+                        {DIRECTION_INFO.ministre.titre}
+                      </p>
+                      <h4 className="font-semibold text-gray-900">
+                        {DIRECTION_INFO.ministre.nom}
+                      </h4>
+                    </div>
+                  </div>
+                  <blockquote className="text-sm text-gray-600 italic border-l-2 border-gray-400 pl-3">
+                    &ldquo;{DIRECTION_INFO.ministre.slogan}&rdquo;
                   </blockquote>
                 </CardContent>
               </Card>

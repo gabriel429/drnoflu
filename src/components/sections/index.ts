@@ -4,3 +4,5 @@ export { ServicesSection } from "./ServicesSection";
 export { SidebarSection } from "./SidebarSection";
 export { BonASavoirSection } from "./BonASavoirSection";
 export { CTASection } from "./CTASection";
+export { PerformancesSection } from "./PerformancesSection";
+export { ProjetsPharesSection } from "./ProjetsPharesSection";

@@ -419,10 +419,17 @@ export const DIRECTION_INFO = {
     slogan:
       "Chaque contribution citoyenne est un pas vers un Lualaba prospère et uni.",
   },
+  ministre: {
+    nom: "Muteteke Luwale Achille",
+    titre: "Ministre Provincial des Finances",
+    photo: "/images/direction/achille.jpg",
+    slogan: "Une gestion financière transparente pour un Lualaba prospère.",
+  },
 };
 
 // Navigation principale
 export const MAIN_NAV: NavItem[] = [
+  { label: "Accueil", href: "/" },
   {
     label: "Services",
     href: "/services",
@@ -432,6 +439,7 @@ export const MAIN_NAV: NavItem[] = [
       { label: "Tarification", href: "/services#tarification" },
     ],
   },
+  { label: "Projets", href: "/projets" },
   { label: "Cadre Juridique", href: "/juridique" },
   { label: "Cartographie", href: "/cartographie" },
   { label: "Actualités", href: "/actualites" },

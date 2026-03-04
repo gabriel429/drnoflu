@@ -496,6 +496,7 @@ export interface CartographieProjet {
   icone?: CartographieIcone;
   couleur: string;
   images?: string[];
+  image_principale?: string;
 
   // Additional details
   details?: Record<string, unknown>;
@@ -505,6 +506,10 @@ export interface CartographieProjet {
   propose_par?: string;
   valide_par?: string;
   date_validation?: string;
+
+  // Featured project (Projet phare)
+  est_phare?: boolean;
+  ordre_phare?: number;
 
   created_at: string;
   updated_at: string;

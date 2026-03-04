@@ -56,13 +56,40 @@ export default function ParametresPage() {
     adresse: "",
     facebook: "",
     description: "",
+    projets_phares_background: "",
   });
 
   const supabase = createBrowserClient();
 
   useEffect(() => {
     fetchProfile();
+    fetchSiteSettings();
   }, []);
+
+  const fetchSiteSettings = async () => {
+    try {
+      const { data } = await supabase
+        .from("site_settings")
+        .select("cle, valeur");
+
+      if (data) {
+        const settings: Record<string, string> = {};
+        data.forEach((item: { cle: string; valeur: string }) => {
+          settings[item.cle] = item.valeur || "";
+        });
+        setSiteSettings({
+          telephone: settings.telephone || "",
+          email: settings.email || "",
+          adresse: settings.adresse || "",
+          facebook: settings.facebook || "",
+          description: settings.description || "",
+          projets_phares_background: settings.projets_phares_background || "",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching site settings:", error);
+    }
+  };
 
   const fetchProfile = async () => {
     try {
@@ -147,6 +174,85 @@ export default function ParametresPage() {
 
       setPasswords({ current: "", new: "", confirm: "" });
       setMessage("Mot de passe mis à jour avec succès");
+    } catch (error: any) {
+      setMessage(`Erreur: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveSiteSettings = async () => {
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const settingsToSave = [
+        {
+          cle: "telephone",
+          valeur: siteSettings.telephone,
+          description: "Téléphone de contact",
+        },
+        {
+          cle: "email",
+          valeur: siteSettings.email,
+          description: "Email de contact",
+        },
+        {
+          cle: "adresse",
+          valeur: siteSettings.adresse,
+          description: "Adresse",
+        },
+        {
+          cle: "facebook",
+          valeur: siteSettings.facebook,
+          description: "Page Facebook",
+        },
+        {
+          cle: "description",
+          valeur: siteSettings.description,
+          description: "Description du site",
+        },
+        {
+          cle: "projets_phares_background",
+          valeur: siteSettings.projets_phares_background,
+          description: "Image de fond pour la section Projets Phares",
+        },
+      ];
+
+      for (const setting of settingsToSave) {
+        // Try to update first, then insert if not exists
+        const { data: existing } = await supabase
+          .from("site_settings")
+          .select("id")
+          .eq("cle", setting.cle)
+          .single();
+
+        let error;
+        if (existing) {
+          // Update existing setting
+          const result = await supabase
+            .from("site_settings")
+            .update({
+              valeur: setting.valeur || "",
+              description: setting.description,
+              updated_at: new Date().toISOString(),
+            })
+            .eq("cle", setting.cle);
+          error = result.error;
+        } else {
+          // Insert new setting
+          const result = await supabase.from("site_settings").insert({
+            cle: setting.cle,
+            valeur: setting.valeur || "",
+            description: setting.description,
+          });
+          error = result.error;
+        }
+
+        if (error) throw error;
+      }
+
+      setMessage("Paramètres du site mis à jour avec succès");
     } catch (error: any) {
       setMessage(`Erreur: ${error.message}`);
     } finally {
@@ -434,9 +540,30 @@ export default function ParametresPage() {
                 />
               </div>
 
-              <Button disabled={loading}>
+              <Separator />
+
+              <div className="space-y-2">
+                <Label>Image de fond - Section Projets Phares</Label>
+                <p className="text-sm text-gray-500 mb-2">
+                  Cette image apparaîtra en arrière-plan de la section
+                  &quot;Projets Phares&quot; sur la page d&apos;accueil
+                </p>
+                <ImageUpload
+                  value={siteSettings.projets_phares_background}
+                  onChange={(url) =>
+                    setSiteSettings({
+                      ...siteSettings,
+                      projets_phares_background: url,
+                    })
+                  }
+                  folder="backgrounds"
+                  className="aspect-[21/9] max-w-md"
+                />
+              </div>
+
+              <Button onClick={saveSiteSettings} disabled={loading}>
                 <Save className="mr-2 h-4 w-4" />
-                Enregistrer les paramètres
+                {loading ? "Enregistrement..." : "Enregistrer les paramètres"}
               </Button>
             </CardContent>
           </Card>
