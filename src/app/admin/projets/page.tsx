@@ -529,11 +529,16 @@ export default function AdminProjetsPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-10">Phare</TableHead>
+                  <TableHead className="w-16">Photo</TableHead>
                   <TableHead>Projet</TableHead>
-                  <TableHead>Type</TableHead>
+                  <TableHead className="hidden md:table-cell">Type</TableHead>
                   <TableHead>Statut</TableHead>
-                  <TableHead>Avancement</TableHead>
-                  <TableHead>Territoire</TableHead>
+                  <TableHead className="hidden lg:table-cell">
+                    Avancement
+                  </TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Territoire
+                  </TableHead>
                   <TableHead>Publié</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -542,7 +547,7 @@ export default function AdminProjetsPage() {
                 {filteredProjets.length === 0 ? (
                   <TableRow>
                     <TableCell
-                      colSpan={8}
+                      colSpan={9}
                       className="text-center py-8 text-gray-500"
                     >
                       Aucun projet trouvé
@@ -570,18 +575,33 @@ export default function AdminProjetsPage() {
                         </Button>
                       </TableCell>
                       <TableCell>
+                        <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                          {projet.image_principale ? (
+                            <Image
+                              src={projet.image_principale}
+                              alt={projet.nom}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <Building2 className="h-5 w-5 text-gray-400" />
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell>
                         <div className="font-medium">{projet.nom}</div>
                         <div className="text-xs text-gray-500 line-clamp-1">
                           {projet.description}
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="hidden md:table-cell">
                         <Badge variant="outline">
                           {getTypeLabel(projet.type_projet)}
                         </Badge>
                       </TableCell>
                       <TableCell>{getStatutBadge(projet.statut)}</TableCell>
-                      <TableCell>
+                      <TableCell className="hidden lg:table-cell">
                         <div className="w-24">
                           <div className="text-xs text-gray-500 mb-1">
                             {projet.pourcentage_avancement}%
@@ -592,7 +612,7 @@ export default function AdminProjetsPage() {
                           />
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="hidden md:table-cell">
                         {projet.territoire ? (
                           <div className="flex items-center gap-1 text-sm">
                             <MapPin className="h-3 w-3" />
