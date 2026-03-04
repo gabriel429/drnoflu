@@ -190,15 +190,9 @@ export function Footer() {
               Politique de confidentialité
             </Link>
             <span className="text-gray-600">|</span>
-            <a
-              href="https://www.akilig.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary-400 flex items-center gap-1"
-            >
-              Développé par AKILI Group
-              <ExternalLink className="h-3 w-3" />
-            </a>
+            <span className="text-gray-500">
+              Service de Communication
+            </span>
           </div>
         </div>
       </div>

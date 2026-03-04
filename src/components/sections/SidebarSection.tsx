@@ -81,7 +81,7 @@ export function SidebarSection() {
                   <Card key={i} className="overflow-hidden">
                     <CardContent className="p-0">
                       <div className="flex flex-col sm:flex-row">
-                        <Skeleton className="sm:w-48 h-32" />
+                        <Skeleton className="sm:w-64 h-48" />
                         <div className="p-4 flex-1 space-y-3">
                           <Skeleton className="h-4 w-24" />
                           <Skeleton className="h-5 w-full" />
@@ -113,7 +113,7 @@ export function SidebarSection() {
                       <Card className="overflow-hidden hover:shadow-md transition-shadow">
                         <CardContent className="p-0">
                           <div className="flex flex-col sm:flex-row">
-                            <div className="sm:w-48 h-32 sm:h-auto bg-gray-200 relative flex-shrink-0">
+                            <div className="sm:w-64 h-48 sm:h-auto bg-gray-200 relative flex-shrink-0">
                               {actu.image_url ? (
                                 <Image
                                   src={actu.image_url}
@@ -172,11 +172,54 @@ export function SidebarSection() {
 
           {/* Sidebar droite */}
           <div className="space-y-6">
+            {/* Directeur Provincial - Section principale */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+                <CardContent className="p-0">
+                  {/* Photo du directeur - grande et bien visible */}
+                  <div className="relative w-full h-64 overflow-hidden">
+                    <Image
+                      src={DIRECTION_INFO.directeur.photo}
+                      alt={DIRECTION_INFO.directeur.nom}
+                      fill
+                      className="object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+                  </div>
+                  {/* Infos du directeur */}
+                  <div className="p-5">
+                    <p className="text-xs text-primary-300 font-medium uppercase tracking-wide mb-1">
+                      {DIRECTION_INFO.directeur.titre}
+                    </p>
+                    <h4 className="font-bold text-lg mb-3">
+                      {DIRECTION_INFO.directeur.nom}
+                    </h4>
+                    <blockquote className="text-sm text-gray-300 italic border-l-2 border-primary-500 pl-3">
+                      &ldquo;{DIRECTION_INFO.directeur.slogan}&rdquo;
+                    </blockquote>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="w-full mt-4 border-gray-600 text-white hover:bg-white/10"
+                    >
+                      <Link href="/direction">En savoir plus</Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
             {/* Liens rapides */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
             >
               <Card>
                 <CardContent className="p-5">
@@ -206,7 +249,7 @@ export function SidebarSection() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.2 }}
             >
               <Card className="overflow-hidden bg-gradient-to-br from-primary-50 to-white border-primary-100">
                 <CardContent className="p-5">
@@ -231,48 +274,6 @@ export function SidebarSection() {
                   <blockquote className="text-sm text-gray-600 italic border-l-2 border-primary-300 pl-3">
                     &ldquo;{DIRECTION_INFO.gouverneure.slogan}&rdquo;
                   </blockquote>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Directeur */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <Card className="overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-                <CardContent className="p-5">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary-400">
-                      <Image
-                        src={DIRECTION_INFO.directeur.photo}
-                        alt={DIRECTION_INFO.directeur.nom}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-xs text-primary-300 font-medium uppercase tracking-wide">
-                        {DIRECTION_INFO.directeur.titre}
-                      </p>
-                      <h4 className="font-semibold">
-                        {DIRECTION_INFO.directeur.nom}
-                      </h4>
-                    </div>
-                  </div>
-                  <blockquote className="text-sm text-gray-300 italic border-l-2 border-primary-500 pl-3">
-                    &ldquo;{DIRECTION_INFO.directeur.slogan}&rdquo;
-                  </blockquote>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full mt-4 border-gray-600 text-white hover:bg-white/10"
-                  >
-                    <Link href="/direction">En savoir plus</Link>
-                  </Button>
                 </CardContent>
               </Card>
             </motion.div>

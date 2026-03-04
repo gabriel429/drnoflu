@@ -1,6 +1,5 @@
 import {
   HeroSection,
-  ChiffresClesSection,
   ServicesSection,
   SidebarSection,
   BonASavoirSection,
@@ -17,14 +16,11 @@ export default function HomePage() {
       {/* Section Hero avec image du bâtiment */}
       <HeroSection />
 
-      {/* Chiffres clés animés */}
-      <ChiffresClesSection />
+      {/* Section actualités + sidebar avec direction - right after hero */}
+      <SidebarSection />
 
       {/* Présentation des services/types de recettes */}
       <ServicesSection />
-
-      {/* Section actualités + sidebar avec direction */}
-      <SidebarSection />
 
       {/* Section Bon à Savoir */}
       <BonASavoirSection />
