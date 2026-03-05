@@ -65,3 +65,26 @@ cd /var/www/drnoflu
 chmod +x deploy.sh
 ./deploy.sh
 ```
+
+## 7) Depannage: Build failed
+
+Si tu vois une erreur comme:
+
+```text
+@supabase/ssr: Your project's URL and API key are required
+```
+
+alors les variables `.env` ne sont pas renseignees correctement sur le VPS.
+
+Verification rapide:
+
+```bash
+cd /var/www/drnoflu
+cat .env
+```
+
+Ensuite relancer:
+
+```bash
+./deploy.sh
+```
