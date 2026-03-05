@@ -24,6 +24,7 @@ export function HeroSection() {
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary-950/90 via-primary-900/80 to-primary-900/60" />
       </div>
@@ -114,6 +115,7 @@ export function HeroSection() {
                 width={350}
                 height={350}
                 className="relative z-10 drop-shadow-2xl"
+                sizes="(max-width: 1024px) 0px, 350px"
               />
             </div>
           </motion.div>

@@ -123,6 +123,8 @@ export function Header() {
               width={100}
               height={100}
               className="h-14 w-auto"
+              priority
+              sizes="56px"
             />
           </Link>
 
@@ -213,6 +215,7 @@ export function Header() {
                       alt="Logo DRNOFLU"
                       width={40}
                       height={40}
+                      sizes="40px"
                     />
                     <span className="font-bold text-primary-900">DRNOFLU</span>
                   </Link>
